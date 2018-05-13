@@ -10,6 +10,11 @@ public class FCFS extends Planista {
     }
 
     @Override
+    protected void handleThisProcess(Proces process) {
+
+    }
+
+    @Override
     protected void handleProcesses() {
 
     }
