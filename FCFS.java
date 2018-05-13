@@ -1,10 +1,16 @@
 package com.thelkl;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class FCFS extends Planista {
+
+    public FCFS(LinkedList<Proces> processesToDispense) {
+        super(new Dispenser(processesToDispense));
+    }
+
     @Override
-    public void run(ArrayList<Proces> processes) {
+    protected void handleProcesses() {
 
     }
 }
