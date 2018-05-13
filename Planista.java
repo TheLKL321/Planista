@@ -17,10 +17,10 @@ public abstract class Planista {
         dispenser.dispense(processes);
     }
 
-    private void updateAverageTimes(double timeWaiting, double timeCompleting){
+    private void updateAverageTimes(int initialRequired, double timeExisting){
         this.completedProcesses++;
-        averageTimeWaiting = (averageTimeWaiting + timeWaiting) / completedProcesses;
-        averageTimeCompleting = (averageTimeCompleting + timeCompleting) / completedProcesses;
+        averageTimeWaiting = (averageTimeWaiting + timeExisting - initialRequired) / completedProcesses;
+        averageTimeCompleting = (averageTimeCompleting + timeExisting) / completedProcesses;
     }
 
     //update "required". If finished, update average times

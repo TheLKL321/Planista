@@ -7,8 +7,5 @@ public class PS extends Planista {
     // mniejsze od 1/n to "zuzyj" posiadana prace na przesuniecie wszystkich o zapotrzebowanie pierwszego a potem powtorz
     // z pozostala praca
 
-    @Override
-    public void run(ArrayList<Proces> processes) {
 
-    }
 }
