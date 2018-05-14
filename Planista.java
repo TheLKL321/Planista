@@ -7,16 +7,18 @@ import java.util.LinkedList;
 
 public abstract class Planista {
     private int completedProcesses = 0;
-    protected int currentTime = 0;
+    private ArrayList<Proces> allProcesses;
     protected double averageTimeWaiting = 0, averageTimeCompleting = 0;
-    protected LinkedList<Proces> processes = new LinkedList<>();
+    protected LinkedList<Proces> queuedProcesses = new LinkedList<>();
     protected Dispenser dispenser;
 
-    public Planista(Dispenser dispenser) {
+    public Planista(Dispenser dispenser, ArrayList<Proces> allProcesses) {
         this.dispenser = dispenser;
-        dispenser.dispense(processes);
+        dispenser.dispense(queuedProcesses);
+        this.allProcesses = allProcesses;
     }
 
+    //TODO: try summing up all the times and dividing by allProcesses.size()
     private void updateAverageTimes(int initialRequired, double timeExisting){
         this.completedProcesses++;
         averageTimeWaiting = (averageTimeWaiting + timeExisting - initialRequired) / completedProcesses;
@@ -32,15 +34,22 @@ public abstract class Planista {
 
     private void tick (){
         handleProcesses();
-        currentTime++;
-        dispenser.dispense(processes);
+        dispenser.dispense(queuedProcesses);
     }
 
     public void run (){
-        while (!processes.isEmpty() && dispenser.ifEmpty()){
+        while (!queuedProcesses.isEmpty() && dispenser.ifEmpty())
             tick();
-        }
 
-        //TODO sout stuff
+        System.out.println("Strategie: " + toString());
+        // TODO: sortuj allProcesses by (process.getWhen() + process.getTimeExisting())
+        for (Proces process : allProcesses) {
+            System.out.print("[" + process.getId() + " " + process.getWhen() + " " + (process.getWhen() + process.getTimeExisting()) + "]");
+        }
+        System.out.println();
+        System.out.println("Średni czas obrotu" + averageTimeCompleting);
+        System.out.println("Średni czas oczekiwania:" + averageTimeWaiting);
     }
+
+    abstract public String toString ();
 }

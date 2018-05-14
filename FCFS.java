@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 public class FCFS extends Planista {
 
-    public FCFS(LinkedList<Proces> processesToDispense) {
-        super(new Dispenser(processesToDispense));
+    public FCFS(LinkedList<Proces> processesToDispense, ArrayList<Proces> allProcesses) {
+        super(new Dispenser(processesToDispense), allProcesses);
     }
 
     @Override
@@ -17,5 +17,10 @@ public class FCFS extends Planista {
     @Override
     protected void handleProcesses() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "FCFS";
     }
 }
