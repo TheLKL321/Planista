@@ -1,4 +1,4 @@
 package com.thelkl;
 
-public class SJF extends Planista {
+public class SJF extends Strategy {
 }

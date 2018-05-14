@@ -3,20 +3,25 @@ package com.thelkl;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class FCFS extends Planista {
+public class FCFS extends Strategy {
 
-    public FCFS(LinkedList<Proces> processesToDispense, ArrayList<Proces> allProcesses) {
+    public FCFS(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
         super(new Dispenser(processesToDispense), allProcesses);
+        queuedTasks = new LinkedList<>();
     }
 
     @Override
-    protected void handleThisProcess(Proces process) {
-
+    protected void handleThisTask(Task task) {
+        task.getHandled();
     }
 
     @Override
-    protected void handleProcesses() {
-
+    protected void handleTasks() {
+        Task handledTask = queuedTasks.peek();
+        handleThisTask(handledTask);
+        if (handledTask.ifCompleted()) updateAverageTimes(queuedTasks.poll());
+        for (Task task : queuedTasks)
+            if (task.getId() != 1) task.waitInQueue();
     }
 
     @Override

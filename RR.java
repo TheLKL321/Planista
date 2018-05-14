@@ -1,8 +1,6 @@
 package com.thelkl;
 
-import java.util.ArrayList;
-
-public class RR extends Planista {
+public class RR extends Strategy {
     private int q;
 
 

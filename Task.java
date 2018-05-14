@@ -1,14 +1,19 @@
 package com.thelkl;
 
-public class Proces {
+public class Task {
     private int id, when, initialRequired;
     private double required, timeExisting;
 
-    public Proces(int id, int when, int required) {
+    public Task(int id, int when, int required) {
         this.id = id;
         this.when = when;
         this.initialRequired = required;
         this.required = required;
+    }
+
+    public void getHandled(){
+        this.required -= 1;
+        timeExisting += 1;
     }
 
     public void getHandled(double timeWorking, int divider){
