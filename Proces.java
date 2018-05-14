@@ -11,9 +11,9 @@ public class Proces {
         this.required = required;
     }
 
-    public void getHandled(double timeWorking, double powerMultiplier){
+    public void getHandled(double timeWorking, int divider){
         this.required -= timeWorking;
-        timeExisting += timeWorking / powerMultiplier;
+        timeExisting += timeWorking * divider;
     }
 
     public void waitInQueue(){
@@ -22,6 +22,10 @@ public class Proces {
 
     public boolean ifCompleted(){
         return required == 0;
+    }
+
+    public double getTimeWaiting() {
+        return timeExisting - initialRequired;
     }
 
     public int getId() {
@@ -34,10 +38,6 @@ public class Proces {
 
     public double getRequired() {
         return required;
-    }
-
-    public int getInitialRequired() {
-        return initialRequired;
     }
 
     public double getTimeExisting() {
