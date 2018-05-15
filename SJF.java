@@ -9,6 +9,7 @@ public class SJF extends Strategy {
 
     public SJF(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
         super(new Dispenser(processesToDispense), allProcesses);
+        //TODO: compare ids if required is the same
         queuedTasks = new PriorityQueue<>(Comparator.comparingDouble(Task::getRequired));
     }
 

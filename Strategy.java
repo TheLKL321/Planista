@@ -7,7 +7,7 @@ import java.util.Queue;
 public abstract class Strategy {
     private int completedTasks = 0;
     private ArrayList<Task> allTasks;
-    protected double averageTimeWaiting = 0, averageTimeCompleting = 0;
+    private double averageTimeWaiting = 0, averageTimeCompleting = 0;
     protected Queue<Task> queuedTasks;
     protected Dispenser dispenser;
 
