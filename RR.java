@@ -7,8 +7,7 @@ public class RR extends Strategy {
     private int q, currentQ;
 
     public RR(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses, int q) {
-        super(new Dispenser(processesToDispense), allProcesses);
-        queuedTasks = new LinkedList<>();
+        super(new LinkedList<>(), new Dispenser(processesToDispense), allProcesses);
         this.q = q;
         this.currentQ = q;
     }

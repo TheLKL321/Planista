@@ -6,8 +6,7 @@ import java.util.LinkedList;
 public class FCFS extends Strategy {
 
     public FCFS(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
-        super(new Dispenser(processesToDispense), allProcesses);
-        queuedTasks = new LinkedList<>();
+        super(new LinkedList<>(), new Dispenser(processesToDispense), allProcesses);
     }
 
     @Override

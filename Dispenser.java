@@ -14,7 +14,7 @@ public class Dispenser {
 
     public void dispense (Queue<Task> destination){
         try {
-            while (tasksToDispense.element().getWhen() == nextTime)
+            while (!tasksToDispense.isEmpty() && tasksToDispense.element().getWhen() == nextTime)
                 destination.add(tasksToDispense.remove());
             this.nextTime++;
         } catch (NoSuchElementException e){

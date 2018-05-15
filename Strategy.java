@@ -12,7 +12,8 @@ public abstract class Strategy {
     protected Queue<Task> queuedTasks;
     protected Dispenser dispenser;
 
-    public Strategy(Dispenser dispenser, ArrayList<Task> allTasks) {
+    public Strategy(Queue<Task> queuedTasks, Dispenser dispenser, ArrayList<Task> allTasks) {
+        this.queuedTasks = queuedTasks;
         this.dispenser = dispenser;
         dispenser.dispense(queuedTasks);
         this.allTasks = allTasks;

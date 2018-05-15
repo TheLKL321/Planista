@@ -8,8 +8,7 @@ import java.util.PriorityQueue;
 public class SRT extends Strategy {
 
     public SRT(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
-        super(new Dispenser(processesToDispense), allProcesses);
-        queuedTasks = new PriorityQueue<>(new TaskComparator());
+        super(new PriorityQueue<>(new TaskComparator()), new Dispenser(processesToDispense), allProcesses);
     }
 
     @Override
