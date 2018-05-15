@@ -14,17 +14,22 @@ public class Parser {
         int i = 1;
         try {
             br = new BufferedReader(new FileReader(new File(path)));
-            String[] initialArgument = br.readLine().split(" ");
+            String line = br.readLine();
+            if (line == null) throw new EOFException();
+            String[] initialArgument = line.split(" ");
             if (initialArgument.length != 1) throw new TokenCountException();
             int taskCount = Integer.parseInt(initialArgument[0]);
 
-            String line;
             for(i = 2; i < taskCount + 2; i++){
                 line = br.readLine();
+                if (line == null) throw new EOFException();
                 String[] tokens = line.split(" ");
                 if (tokens.length != 2) throw new TokenCountException();
                 allTasks.add(new Task(i - 1, Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1])));
             }
+        } catch (EOFException e){
+            System.out.println("Błąd w wierszu " + i + " : Plik nie posiada wszystkich danych.");
+            return null;
         } catch (IOException e) {
             System.out.println("Plik z danymi nie jest dostępny.");
             return null;
@@ -48,17 +53,23 @@ public class Parser {
         strategyArray.add(new PS(tasksToDispense, allTasks));
 
         try {
-            String[] initialArgument = br.readLine().split(" ");
+            String line = br.readLine();
+            if (line == null) throw new EOFException();
+            String[] initialArgument = line.split(" ");
             if (initialArgument.length != 1) throw new TokenCountException();
             int rrCount = Integer.parseInt(initialArgument[0]);
             i++;
 
-            String[] tokens = br.readLine().split(" ");
+            line = br.readLine();
+            if (line == null) throw new EOFException();
+            String[] tokens = line.split(" ");
             if (tokens.length != rrCount) throw new TokenCountException();
             for (int j = 0; j < rrCount; j++)
                 strategyArray.add(new RR(tasksToDispense, allTasks, Integer.parseInt(tokens[j])));
-
-        } catch (IOException e) {
+        } catch (EOFException e){
+            System.out.println("Błąd w wierszu " + i + " : Plik nie posiada wszystkich danych.");
+            return null;
+        }catch (IOException e) {
             System.out.println("Plik z danymi nie jest dostępny.");
             return null;
         } catch (NumberFormatException e){

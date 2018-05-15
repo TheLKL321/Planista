@@ -8,9 +8,7 @@ public class TaskComparator implements Comparator<Task> {
     public int compare(Task o1, Task o2) {
         if (o1.getRequired() < o2.getRequired()) return -1;
         else if (o1.getRequired() == o2.getRequired()) {
-            if (o1.getId() < o2.getId()) return -1;
-            else if (o1.getId() == o2.getId()) return 0;
-            else return 1;
+            return Integer.compare(o1.getId(), o2.getId());
         } else return 1;
     }
 }
