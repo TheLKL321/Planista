@@ -9,7 +9,7 @@ public class SRT extends Strategy {
 
     public SRT(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
         super(new Dispenser(processesToDispense), allProcesses);
-        queuedTasks = new PriorityQueue<>(Comparator.comparingDouble(Task::getRequired));
+        queuedTasks = new PriorityQueue<>(new TaskComparator());
     }
 
     // TODO: handle exceptions from queue
