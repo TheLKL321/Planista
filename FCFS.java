@@ -10,7 +10,6 @@ public class FCFS extends Strategy {
         queuedTasks = new LinkedList<>();
     }
 
-    // TODO: handle exceptions from queue
     @Override
     protected void handleTasks() {
         Task handledTask = queuedTasks.element();

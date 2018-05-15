@@ -1,6 +1,7 @@
 package com.thelkl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -29,7 +30,7 @@ public abstract class Strategy {
     abstract protected void handleTasks();
 
     private void tick (){
-        handleTasks();
+        if (!queuedTasks.isEmpty()) handleTasks();
         dispenser.dispense(queuedTasks);
     }
 
@@ -38,9 +39,9 @@ public abstract class Strategy {
             tick();
 
         System.out.println("Strategie: " + toString());
-        // TODO: sortuj allTasks by (process.getWhen() + process.getTimeExisting())
-        for (Task process : allTasks) {
-            System.out.print("[" + process.getId() + " " + process.getWhen() + " " + (process.getWhen() + process.getTimeExisting()) + "]");
+        allTasks.sort(Comparator.comparingDouble(Task::getTimeFromZero));
+        for (Task task : allTasks) {
+            System.out.print("[" + task.getId() + " " + task.getWhen() + " " + task.getTimeFromZero() + "]");
         }
         System.out.println();
         System.out.println("Średni czas obrotu" + averageTimeCompleting);

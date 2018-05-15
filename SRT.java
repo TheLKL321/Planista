@@ -12,7 +12,6 @@ public class SRT extends Strategy {
         queuedTasks = new PriorityQueue<>(new TaskComparator());
     }
 
-    // TODO: handle exceptions from queue
     @Override
     protected void handleTasks() {
         Task handledTask = queuedTasks.element();

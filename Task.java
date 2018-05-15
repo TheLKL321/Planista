@@ -48,4 +48,8 @@ public class Task {
     public double getTimeExisting() {
         return timeExisting;
     }
+
+    public double getTimeFromZero() {
+        return timeExisting + when;
+    }
 }

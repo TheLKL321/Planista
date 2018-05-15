@@ -9,11 +9,9 @@ public class SJF extends Strategy {
 
     public SJF(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
         super(new Dispenser(processesToDispense), allProcesses);
-        //TODO: compare ids if required is the same
         queuedTasks = new PriorityQueue<>(new TaskComparator());
     }
 
-    // TODO: handle exceptions from queue
     @Override
     protected void handleTasks() {
         Task handledTask = queuedTasks.element();
