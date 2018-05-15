@@ -16,9 +16,9 @@ public class Task {
         timeExisting += 1;
     }
 
-    public void getHandled(double timeWorking, int divider){
+    public void getHandled(double timeWorking, double timePassed){
         this.required -= timeWorking;
-        timeExisting += timeWorking * divider;
+        timeExisting += timePassed;
     }
 
     public void waitInQueue(){

@@ -10,15 +10,11 @@ public class FCFS extends Strategy {
         queuedTasks = new LinkedList<>();
     }
 
-    @Override
-    protected void handleThisTask(Task task) {
-        task.getHandled();
-    }
-
+    // TODO: handle exceptions from queue
     @Override
     protected void handleTasks() {
-        Task handledTask = queuedTasks.peek();
-        handleThisTask(handledTask);
+        Task handledTask = queuedTasks.element();
+        handledTask.getHandled();
         if (handledTask.ifCompleted()) updateAverageTimes(queuedTasks.poll());
         for (Task task : queuedTasks)
             if (task.getId() != 1) task.waitInQueue();

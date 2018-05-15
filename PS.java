@@ -12,22 +12,31 @@ public class PS extends Strategy {
     }
 
     @Override
-    protected void handleThisTask(Task task) {
-
-    }
-
-    @Override
     protected void handleTasks() {
+        double timeLeft = 1.0;
+        int divider = queuedTasks.size();
 
+        double timePassed;
+        while (queuedTasks.element().getRequired() < (1 / divider) * timeLeft){
+            timePassed = queuedTasks.element().getRequired() * divider;
+            for (Task task : queuedTasks)
+                task.getHandled(queuedTasks.element().getRequired(), timePassed);
+            timeLeft -= timePassed;
+
+            while (queuedTasks.element().ifCompleted())
+                updateAverageTimes(queuedTasks.poll());
+        }
+
+        if (timeLeft > 0) {
+            for (Task task : queuedTasks)
+                task.getHandled(queuedTasks.element().getRequired(), timeLeft);
+            while (queuedTasks.element().ifCompleted())
+                updateAverageTimes(queuedTasks.poll());
+        }
     }
 
     @Override
     public String toString() {
         return "PS";
     }
-    // Sortuj wzgledem pozostalego zapotrzebowania, za kazdym tickiem sprawdzaj zapotrzebowanie pierwszego, jak jest
-    // mniejsze od 1/n to wszystkim odejmij to zapotrzebowanie i dodaj czas rowny liczba pozostalych procesow przed
-    // zakonczeniem pierwszego * to zapotrzebowanie
-
-
 }

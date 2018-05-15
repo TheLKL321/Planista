@@ -24,9 +24,6 @@ public abstract class Strategy {
         averageTimeCompleting = (averageTimeCompleting + task.getTimeExisting()) / completedTasks;
     }
 
-    //update "required". If finished, update average times
-    abstract protected void handleThisTask(Task task);
-
     //for the first process (or every), work on it (them). If any finished, update average times.
     //for every process, update waiting time
     abstract protected void handleTasks();
