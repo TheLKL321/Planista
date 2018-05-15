@@ -7,8 +7,8 @@ import java.util.PriorityQueue;
 
 public class SRT extends Strategy {
 
-    public SRT(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
-        super(new PriorityQueue<>(new TaskComparator()), new Dispenser(processesToDispense), allProcesses);
+    public SRT(ArrayList<Task> allTasks) {
+        super(new PriorityQueue<>(new TaskComparator()), new Dispenser(new LinkedList<>(allTasks)), allTasks);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class SRT extends Strategy {
         }
 
         if (handledTask.ifCompleted()) {
-            updateAverageTimes(handledTask);
+            updateTimes(handledTask);
             queuedTasks.remove(handledTask);
         }
     }

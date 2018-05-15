@@ -6,8 +6,8 @@ import java.util.LinkedList;
 public class RR extends Strategy {
     private int q, currentQ;
 
-    public RR(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses, int q) {
-        super(new LinkedList<>(), new Dispenser(processesToDispense), allProcesses);
+    public RR(ArrayList<Task> allTasks, int q) {
+        super(new LinkedList<>(), new Dispenser(new LinkedList<>(allTasks)), allTasks);
         this.q = q;
         this.currentQ = q;
     }
@@ -22,7 +22,7 @@ public class RR extends Strategy {
         for (Task task : queuedTasks)
             if (task.getId() != 1) task.waitInQueue();
         if (handledTask.ifCompleted()) {
-            updateAverageTimes(queuedTasks.poll());
+            updateTimes(queuedTasks.poll());
             currentQ = q;
         } else
             this.currentQ--;

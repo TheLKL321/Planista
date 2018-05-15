@@ -3,6 +3,8 @@ package com.thelkl;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class Parser {
@@ -44,13 +46,20 @@ public class Parser {
         return parsePlanners(allTasks, br, i);
     }
 
+    private static ArrayList<Task> deepCopy (ArrayList<Task> arr){
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : arr){
+            result.add(new Task(task.getId(), task.getWhen(), task.getRequired()));
+        }
+        return result;
+    }
+
     private static ArrayList<Strategy> parsePlanners (ArrayList<Task> allTasks, BufferedReader br, int i){
         ArrayList<Strategy> strategyArray = new ArrayList<>();
-        LinkedList<Task> tasksToDispense = new LinkedList<>(allTasks);
-        strategyArray.add(new FCFS(tasksToDispense, allTasks));
-        strategyArray.add(new SJF(tasksToDispense, allTasks));
-        strategyArray.add(new SRT(tasksToDispense, allTasks));
-        strategyArray.add(new PS(tasksToDispense, allTasks));
+        strategyArray.add(new FCFS(allTasks));
+        strategyArray.add(new SJF(deepCopy(allTasks)));
+        strategyArray.add(new SRT(deepCopy(allTasks)));
+        strategyArray.add(new PS(deepCopy(allTasks)));
 
         try {
             String line = br.readLine();
@@ -65,7 +74,7 @@ public class Parser {
             String[] tokens = line.split(" ");
             if (tokens.length != rrCount) throw new TokenCountException();
             for (int j = 0; j < rrCount; j++)
-                strategyArray.add(new RR(tasksToDispense, allTasks, Integer.parseInt(tokens[j])));
+                strategyArray.add(new RR(deepCopy(allTasks), Integer.parseInt(tokens[j])));
         } catch (EOFException e){
             System.out.println("Błąd w wierszu " + i + " : Plik nie posiada wszystkich danych.");
             return null;

@@ -7,8 +7,8 @@ import java.util.PriorityQueue;
 
 public class SJF extends Strategy {
 
-    public SJF(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
-        super(new PriorityQueue<>(new TaskComparator()), new Dispenser(processesToDispense), allProcesses);
+    public SJF(ArrayList<Task> allTasks) {
+        super(new PriorityQueue<>(new TaskComparator()), new Dispenser(new LinkedList<>(allTasks)), allTasks);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class SJF extends Strategy {
                 if (task.getId() != handledTask.getId()) task.waitInQueue();
             if (!handledTask.ifCompleted()) dispenser.dispense(queuedTasks);
         }
-        updateAverageTimes(handledTask);
+        updateTimes(handledTask);
         queuedTasks.remove(handledTask);
     }
 

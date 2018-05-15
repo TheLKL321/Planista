@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 public class FCFS extends Strategy {
 
-    public FCFS(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
-        super(new LinkedList<>(), new Dispenser(processesToDispense), allProcesses);
+    public FCFS(ArrayList<Task> allTasks) {
+        super(new LinkedList<>(), new Dispenser(new LinkedList<>(allTasks)), allTasks);
     }
 
     @Override
@@ -14,8 +14,8 @@ public class FCFS extends Strategy {
         Task handledTask = queuedTasks.element();
         handledTask.getHandled();
         for (Task task : queuedTasks)
-            if (task.getId() != 1) task.waitInQueue();
-        if (handledTask.ifCompleted()) updateAverageTimes(queuedTasks.poll());
+            if (task.getId() != handledTask.getId()) task.waitInQueue();
+        if (handledTask.ifCompleted()) updateTimes(queuedTasks.poll());
     }
 
     @Override

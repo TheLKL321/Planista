@@ -7,8 +7,8 @@ import java.util.PriorityQueue;
 
 public class PS extends Strategy {
 
-    public PS(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
-        super(new PriorityQueue<>(new TaskComparator()), new Dispenser(processesToDispense), allProcesses);
+    public PS(ArrayList<Task> allTasks) {
+        super(new PriorityQueue<>(new TaskComparator()), new Dispenser(new LinkedList<>(allTasks)), allTasks);
     }
 
     @Override
@@ -24,14 +24,14 @@ public class PS extends Strategy {
             timeLeft -= timePassed;
 
             while (queuedTasks.element().ifCompleted())
-                updateAverageTimes(queuedTasks.poll());
+                updateTimes(queuedTasks.poll());
         }
 
         if (timeLeft > 0) {
             for (Task task : queuedTasks)
                 task.getHandled(queuedTasks.element().getRequired(), timeLeft);
-            while (queuedTasks.element().ifCompleted())
-                updateAverageTimes(queuedTasks.poll());
+            while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted())
+                updateTimes(queuedTasks.poll());
         }
     }
 

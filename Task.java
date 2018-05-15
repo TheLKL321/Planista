@@ -1,10 +1,10 @@
 package com.thelkl;
 
 public class Task {
-    private int id, when, initialRequired;
-    private double required, timeExisting;
+    private int id, when;
+    private double required, initialRequired, timeExisting;
 
-    public Task(int id, int when, int required) {
+    public Task(int id, int when, double required) {
         this.id = id;
         this.when = when;
         this.initialRequired = required;

@@ -2,13 +2,11 @@ package com.thelkl;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.Queue;
 
 public abstract class Strategy {
-    private int completedTasks = 0;
     private ArrayList<Task> allTasks;
-    private double averageTimeWaiting = 0, averageTimeCompleting = 0;
+    private double summedTimeWaiting = 0, summedTimeExisting = 0;
     protected Queue<Task> queuedTasks;
     protected Dispenser dispenser;
 
@@ -19,11 +17,9 @@ public abstract class Strategy {
         this.allTasks = allTasks;
     }
 
-    //TODO: try summing up all the times and dividing by allTasks.size()
-    protected void updateAverageTimes(Task task){
-        this.completedTasks++;
-        averageTimeWaiting = (averageTimeWaiting + task.getTimeWaiting()) / completedTasks;
-        averageTimeCompleting = (averageTimeCompleting + task.getTimeExisting()) / completedTasks;
+    protected void updateTimes(Task task){
+        summedTimeWaiting += task.getTimeWaiting();
+        summedTimeExisting = task.getTimeExisting();
     }
 
     //for the first process (or every), work on it (them). If any finished, update average times.
@@ -31,7 +27,7 @@ public abstract class Strategy {
     abstract protected void handleTasks();
 
     private void tick (){
-        if (!queuedTasks.isEmpty()) handleTasks();
+        handleTasks();
         dispenser.dispense(queuedTasks);
     }
 
@@ -45,8 +41,8 @@ public abstract class Strategy {
             System.out.print("[" + task.getId() + " " + task.getWhen() + " " + task.getTimeFromZero() + "]");
         }
         System.out.println();
-        System.out.println("Średni czas obrotu" + averageTimeCompleting);
-        System.out.println("Średni czas oczekiwania:" + averageTimeWaiting);
+        System.out.println("Średni czas obrotu: " +  (summedTimeExisting / allTasks.size()));
+        System.out.println("Średni czas oczekiwania: " + (summedTimeWaiting / allTasks.size()));
     }
 
     abstract public String toString ();
