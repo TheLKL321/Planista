@@ -2,12 +2,13 @@ package com.thelkl;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class PS extends Strategy {
 
-    public PS(Dispenser dispenser, ArrayList<Task> allTasks) {
-        super(dispenser, allTasks);
+    public PS(LinkedList<Task> processesToDispense, ArrayList<Task> allProcesses) {
+        super(new Dispenser(processesToDispense), allProcesses);
         queuedTasks = new PriorityQueue<>(Comparator.comparingDouble(Task::getRequired));
     }
 
