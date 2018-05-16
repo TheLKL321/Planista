@@ -26,7 +26,7 @@ public class Task {
     }
 
     public boolean ifCompleted(){
-        return required == 0;
+        return required <= 0;
     }
 
     public double getTimeWaiting() {
