@@ -1,5 +1,7 @@
 package com.thelkl;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Queue;
@@ -19,7 +21,7 @@ public abstract class Strategy {
 
     protected void updateTimes(Task task){
         summedTimeWaiting += task.getTimeWaiting();
-        summedTimeExisting = task.getTimeExisting();
+        summedTimeExisting += task.getTimeExisting();
     }
 
     //for the first process (or every), work on it (them). If any finished, update average times.
@@ -31,6 +33,7 @@ public abstract class Strategy {
         dispenser.dispense(queuedTasks);
     }
 
+    //TODO: two decimal places
     public void run (){
         while (!queuedTasks.isEmpty() && dispenser.ifEmpty())
             tick();
@@ -38,11 +41,11 @@ public abstract class Strategy {
         System.out.println("Strategie: " + toString());
         allTasks.sort(Comparator.comparingDouble(Task::getTimeFromZero));
         for (Task task : allTasks) {
-            System.out.print("[" + task.getId() + " " + task.getWhen() + " " + task.getTimeFromZero() + "]");
+            System.out.printf("[%d %d %.2f]", task.getId(), task.getWhen(), Math.round(task.getTimeFromZero() * 100.0) / 100.0);
         }
         System.out.println();
-        System.out.println("Średni czas obrotu: " +  (summedTimeExisting / allTasks.size()));
-        System.out.println("Średni czas oczekiwania: " + (summedTimeWaiting / allTasks.size()));
+        System.out.printf("Średni czas obrotu: %.2f\n", Math.round((summedTimeExisting / allTasks.size()) * 100.0) / 100.0);
+        System.out.printf("Średni czas oczekiwania: %.2f\n", Math.round((summedTimeWaiting / allTasks.size()) * 100.0) / 100.0);
     }
 
     abstract public String toString ();

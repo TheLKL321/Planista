@@ -12,6 +12,7 @@ public class RR extends Strategy {
         this.currentQ = q;
     }
 
+    //TODO: fix rr
     @Override
     protected void handleTasks() {
         if (currentQ == 0)

@@ -11,25 +11,26 @@ public class PS extends Strategy {
         super(new PriorityQueue<>(new TaskComparator()), new Dispenser(new LinkedList<>(allTasks)), allTasks);
     }
 
+    //TODO:fix ps
     @Override
     protected void handleTasks() {
         double timeLeft = 1.0;
         int divider = queuedTasks.size();
 
         double timePassed;
-        while (queuedTasks.element().getRequired() < (1 / divider) * timeLeft){
+        while (!queuedTasks.isEmpty() && queuedTasks.element().getRequired() < (1 / divider) * timeLeft){
             timePassed = queuedTasks.element().getRequired() * divider;
             for (Task task : queuedTasks)
                 task.getHandled(queuedTasks.element().getRequired(), timePassed);
             timeLeft -= timePassed;
 
-            while (queuedTasks.element().ifCompleted())
+            while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted())
                 updateTimes(queuedTasks.poll());
         }
 
         if (timeLeft > 0) {
             for (Task task : queuedTasks)
-                task.getHandled(queuedTasks.element().getRequired(), timeLeft);
+                task.getHandled(timeLeft / divider, timeLeft);
             while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted())
                 updateTimes(queuedTasks.poll());
         }
