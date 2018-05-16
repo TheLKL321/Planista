@@ -17,17 +17,17 @@ public class Parser {
         return tokens;
     }
 
-    public static ArrayList<Strategy> parseInput (String path){
+    public static ArrayList<Strategy> parseInput (String[] args){
         ArrayList<Task> allTasks = new ArrayList<>();
         BufferedReader br;
         int i = 1;
 
         try {
             Reader r;
-            if (path == null)
+            if (args.length == 0)
                 r = new InputStreamReader(System.in);
             else
-                r = new FileReader(new File(path));
+                r = new FileReader(new File(args[0]));
 
             br = new BufferedReader(r);
 
