@@ -53,7 +53,7 @@ public class Parser {
             return null;
         }
 
-        return parsePlanners(allTasks, br, i);
+        return parseStrategies(allTasks, br, i);
     }
 
     private static ArrayList<Task> deepCopy (ArrayList<Task> arr){
@@ -64,7 +64,7 @@ public class Parser {
         return result;
     }
 
-    private static ArrayList<Strategy> parsePlanners (ArrayList<Task> allTasks, BufferedReader br, int i){
+    private static ArrayList<Strategy> parseStrategies(ArrayList<Task> allTasks, BufferedReader br, int i){
         ArrayList<Strategy> strategyArray = new ArrayList<>();
         strategyArray.add(new FCFS(allTasks));
         strategyArray.add(new SJF(deepCopy(allTasks)));

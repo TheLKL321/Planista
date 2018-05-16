@@ -1,8 +1,8 @@
 package com.thelkl;
 
 public class Task {
-    private int id, when;
-    private double required, timeExisting, timeWithProcessor;
+    private int id, when; // when - time at which this task enters the queue
+    private double required, timeExisting, timeWithProcessor; // timeWithProcessor - the amount of time spent while being worked on
 
     public Task(int id, int when, double required) {
         this.id = id;
@@ -54,6 +54,7 @@ public class Task {
         return timeExisting;
     }
 
+    // Time from point zero, the start of simulation
     public double getTimeFromZero() {
         return timeExisting + when;
     }

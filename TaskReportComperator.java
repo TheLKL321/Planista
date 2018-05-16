@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 public class TaskReportComperator implements Comparator<Task> {
 
+    // Compares time from the point zero first, id if former is equal
     @Override
     public int compare(Task o1, Task o2) {
         if (o1.getTimeFromZero() < o2.getTimeFromZero())
