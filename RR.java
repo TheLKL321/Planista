@@ -21,8 +21,12 @@ public class RR extends Strategy {
 
         Task handledTask = queuedTasks.element();
         handledTask.getHandled();
-        for (Task task : queuedTasks)
-            if (task.getId() != handledTask.getId()) task.waitInQueue();
+
+        for (Task task : queuedTasks) {
+            if (task.getId() != handledTask.getId())
+                task.waitInQueue();
+        }
+
         if (handledTask.ifCompleted()) {
             updateTimes(queuedTasks.poll());
             currentQ = q;

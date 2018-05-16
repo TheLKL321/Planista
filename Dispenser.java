@@ -1,6 +1,5 @@
 package com.thelkl;
 
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 

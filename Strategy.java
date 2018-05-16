@@ -1,7 +1,5 @@
 package com.thelkl;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Queue;
@@ -24,8 +22,6 @@ public abstract class Strategy {
         summedTimeExisting += task.getTimeExisting();
     }
 
-    //for the first process (or every), work on it (them). If any finished, update average times.
-    //for every process, update waiting time
     abstract protected void handleTasks();
 
     private void tick (){

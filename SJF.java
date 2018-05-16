@@ -1,7 +1,6 @@
 package com.thelkl;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
@@ -16,10 +15,14 @@ public class SJF extends Strategy {
         Task handledTask = queuedTasks.element();
         while (!handledTask.ifCompleted()) {
             handledTask.getHandled();
-            for (Task task : queuedTasks)
-                if (task.getId() != handledTask.getId()) task.waitInQueue();
-            if (!handledTask.ifCompleted()) dispenser.dispense(queuedTasks);
+            for (Task task : queuedTasks) {
+                if (task.getId() != handledTask.getId())
+                    task.waitInQueue();
+            }
+            if (!handledTask.ifCompleted())
+                dispenser.dispense(queuedTasks);
         }
+
         updateTimes(handledTask);
         queuedTasks.remove(handledTask);
     }

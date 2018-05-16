@@ -1,7 +1,6 @@
 package com.thelkl;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
@@ -30,6 +29,7 @@ public class PS extends Strategy {
         if (timeLeft > 0) {
             for (Task task : queuedTasks)
                 task.getHandled(Math.ceil((timeLeft / divider) * 10000000000.0) / 10000000000.0, timeLeft);
+
             while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted())
                 updateTimes(queuedTasks.poll());
         }
