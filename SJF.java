@@ -23,7 +23,6 @@ public class SJF extends Strategy {
                 dispenser.dispense(queuedTasks);
         }
 
-        updateTimes(handledTask);
         queuedTasks.remove(handledTask);
     }
 

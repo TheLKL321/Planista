@@ -25,7 +25,7 @@ public class PS extends Strategy {
             timeLeft -= timePassed;
 
             while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted())
-                updateTimes(queuedTasks.poll());
+                queuedTasks.poll();
 
             divider = queuedTasks.size();
         }
@@ -35,7 +35,7 @@ public class PS extends Strategy {
                 task.getHandled(timeLeft / divider , timeLeft);
 
             while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted(EPSILON))
-                updateTimes(queuedTasks.poll());
+                queuedTasks.poll();
         }
     }
 

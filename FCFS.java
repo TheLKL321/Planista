@@ -15,7 +15,9 @@ public class FCFS extends Strategy {
         handledTask.getHandled();
         for (Task task : queuedTasks)
             if (task.getId() != handledTask.getId()) task.waitInQueue();
-        if (handledTask.ifCompleted()) updateTimes(queuedTasks.poll());
+
+        if (handledTask.ifCompleted())
+            queuedTasks.poll();
     }
 
     @Override

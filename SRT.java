@@ -23,10 +23,8 @@ public class SRT extends Strategy {
                 dispenser.dispense(queuedTasks);
         }
 
-        if (handledTask.ifCompleted()) {
-            updateTimes(handledTask);
+        if (handledTask.ifCompleted())
             queuedTasks.remove(handledTask);
-        }
     }
 
     @Override

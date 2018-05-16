@@ -28,7 +28,7 @@ public class RR extends Strategy {
         }
 
         if (handledTask.ifCompleted()) {
-            updateTimes(queuedTasks.poll());
+            queuedTasks.poll();
             currentQ = q;
         } else
             this.currentQ--;

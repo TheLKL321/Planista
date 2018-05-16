@@ -5,7 +5,6 @@ import java.util.Queue;
 
 public abstract class Strategy {
     private ArrayList<Task> allTasks;
-    private double summedTimeWaiting = 0, summedTimeExisting = 0;
     protected Queue<Task> queuedTasks;
     protected Dispenser dispenser;
 
@@ -14,11 +13,6 @@ public abstract class Strategy {
         this.dispenser = dispenser;
         dispenser.dispense(queuedTasks);
         this.allTasks = allTasks;
-    }
-
-    protected void updateTimes(Task task){
-        summedTimeWaiting += task.getTimeWaiting();
-        summedTimeExisting += task.getTimeExisting();
     }
 
     abstract protected void handleTasks();
@@ -38,8 +32,8 @@ public abstract class Strategy {
             System.out.printf("[%d %d %.2f]", task.getId(), task.getWhen(), Math.round(task.getTimeFromZero() * 100.0) / 100.0);
         }
         System.out.println();
-        System.out.printf("Średni czas obrotu: %.2f\n", Math.round((summedTimeExisting / allTasks.size()) * 100.0) / 100.0);
-        System.out.printf("Średni czas oczekiwania: %.2f\n", Math.round((summedTimeWaiting / allTasks.size()) * 100.0) / 100.0);
+        (new AverageTimeExistingCriterion()).report(allTasks);
+        (new AverageTimeWaitingCriterion()).report(allTasks);
     }
 
     abstract public String toString ();
