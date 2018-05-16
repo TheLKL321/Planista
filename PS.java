@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class PS extends Strategy {
+    private static final double EPSILON = 0.0001;
 
     public PS(ArrayList<Task> allTasks) {
         super(new PriorityQueue<>(new TaskComparator()), new Dispenser(new LinkedList<>(allTasks)), allTasks);
@@ -30,7 +31,7 @@ public class PS extends Strategy {
             for (Task task : queuedTasks)
                 task.getHandled(Math.ceil((timeLeft / divider) * 10000000000.0) / 10000000000.0, timeLeft);
 
-            while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted())
+            while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted(EPSILON))
                 updateTimes(queuedTasks.poll());
         }
     }

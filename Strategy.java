@@ -1,7 +1,6 @@
 package com.thelkl;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Queue;
 
 public abstract class Strategy {
@@ -30,11 +29,11 @@ public abstract class Strategy {
     }
 
     public void run (){
-        while (!queuedTasks.isEmpty() && dispenser.ifEmpty())
+        while (!queuedTasks.isEmpty() || !dispenser.ifEmpty())
             tick();
 
         System.out.println("Strategie: " + toString());
-        allTasks.sort(Comparator.comparingDouble(Task::getTimeFromZero));
+        allTasks.sort(new TaskReportComperator());
         for (Task task : allTasks) {
             System.out.printf("[%d %d %.2f]", task.getId(), task.getWhen(), Math.round(task.getTimeFromZero() * 100.0) / 100.0);
         }

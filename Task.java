@@ -30,6 +30,10 @@ public class Task {
         return required <= 0;
     }
 
+    public boolean ifCompleted(double epsilon){
+        return required <= epsilon;
+    }
+
     public double getTimeWaiting() {
         return timeExisting - timeWithProcessor;
     }
