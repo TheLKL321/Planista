@@ -16,20 +16,23 @@ public class PS extends Strategy {
         double timeLeft = 1.0;
         int divider = queuedTasks.size();
 
-        double timePassed;
-        while (!queuedTasks.isEmpty() && queuedTasks.element().getRequired() < (1 / divider) * timeLeft){
-            timePassed = queuedTasks.element().getRequired() * divider;
+        double timePassed, timeWorked;
+        while (!queuedTasks.isEmpty() && queuedTasks.element().getRequired() < timeLeft / divider){
+            timeWorked = queuedTasks.element().getRequired();
+            timePassed = timeWorked * divider;
             for (Task task : queuedTasks)
-                task.getHandled(queuedTasks.element().getRequired(), timePassed);
+                task.getHandled(timeWorked, timePassed);
             timeLeft -= timePassed;
 
             while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted())
                 updateTimes(queuedTasks.poll());
+
+            divider = queuedTasks.size();
         }
 
         if (timeLeft > 0) {
             for (Task task : queuedTasks)
-                task.getHandled(Math.ceil((timeLeft / divider) * 10000000000.0) / 10000000000.0, timeLeft);
+                task.getHandled(timeLeft / divider , timeLeft);
 
             while (!queuedTasks.isEmpty() && queuedTasks.element().ifCompleted(EPSILON))
                 updateTimes(queuedTasks.poll());
