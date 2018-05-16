@@ -23,7 +23,13 @@ public class Parser {
         int i = 1;
 
         try {
-            br = new BufferedReader(new FileReader(new File(path)));
+            Reader r;
+            if (path == null)
+                r = new InputStreamReader(System.in);
+            else
+                r = new FileReader(new File(path));
+
+            br = new BufferedReader(r);
 
             String[] initialArgument = tokenize(br.readLine(), 1);
             int taskCount = Integer.parseInt(initialArgument[0]);
