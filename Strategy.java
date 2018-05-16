@@ -33,7 +33,6 @@ public abstract class Strategy {
         dispenser.dispense(queuedTasks);
     }
 
-    //TODO: two decimal places
     public void run (){
         while (!queuedTasks.isEmpty() && dispenser.ifEmpty())
             tick();

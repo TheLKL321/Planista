@@ -2,23 +2,24 @@ package com.thelkl;
 
 public class Task {
     private int id, when;
-    private double required, initialRequired, timeExisting;
+    private double required, timeExisting, timeWithProcessor;
 
     public Task(int id, int when, double required) {
         this.id = id;
         this.when = when;
-        this.initialRequired = required;
         this.required = required;
     }
 
     public void getHandled(){
-        this.required -= 1;
-        timeExisting += 1;
+        this.required--;
+        this.timeExisting++;
+        this.timeWithProcessor++;
     }
 
     public void getHandled(double timeWorking, double timePassed){
         this.required -= timeWorking;
         timeExisting += timePassed;
+        timeWithProcessor += timePassed;
     }
 
     public void waitInQueue(){
@@ -30,7 +31,7 @@ public class Task {
     }
 
     public double getTimeWaiting() {
-        return timeExisting - initialRequired;
+        return timeExisting - timeWithProcessor;
     }
 
     public int getId() {
