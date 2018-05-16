@@ -12,16 +12,17 @@ public class RR extends Strategy {
         this.currentQ = q;
     }
 
-    //TODO: fix rr
     @Override
     protected void handleTasks() {
-        if (currentQ == 0)
+        if (currentQ == 0) {
             queuedTasks.add(queuedTasks.poll());
+            currentQ = q;
+        }
 
         Task handledTask = queuedTasks.element();
         handledTask.getHandled();
         for (Task task : queuedTasks)
-            if (task.getId() != 1) task.waitInQueue();
+            if (task.getId() != handledTask.getId()) task.waitInQueue();
         if (handledTask.ifCompleted()) {
             updateTimes(queuedTasks.poll());
             currentQ = q;
