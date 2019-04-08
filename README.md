@@ -40,4 +40,4 @@ Należy sprawdzać istnienie i możliwość otwarcia pliku z danymi. Informacja 
 
 Nie należy zakładać istnienia pliku z danymi w tym samym katalogu, w którym znajduje się program.
 
-Należy sprawdzać poprawność danych wejściowych. Informacja o błędzie powinna mieć postać: `Błąd w wierszu &lt;numer wiersza&gt; : &lt;informacja dodatkowa&gt;.` Wiersze z danymi numerowane są od jedynki. W przypadku wykrycia pierwszego błędu w danych program powinien zakończyć pracę. Informacja dodatkowa powinna, w miarę możliwości, określać dokładniej rodzaj błędu. Jej konkretna postać zależy od decyzji programisty.
+Należy sprawdzać poprawność danych wejściowych. Informacja o błędzie powinna mieć postać: `Błąd w wierszu <numer wiersza> : <informacja dodatkowa>.` Wiersze z danymi numerowane są od jedynki. W przypadku wykrycia pierwszego błędu w danych program powinien zakończyć pracę. Informacja dodatkowa powinna, w miarę możliwości, określać dokładniej rodzaj błędu. Jej konkretna postać zależy od decyzji programisty.
